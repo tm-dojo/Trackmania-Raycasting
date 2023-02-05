@@ -3,6 +3,7 @@ import open3d.visualization.gui as gui
 import open3d.visualization.rendering as rendering
 import random
 
+
 class Raycasting:
     def __init__(self):
         self.map_mesh = None
@@ -25,9 +26,10 @@ class Raycasting:
         ]
         mat.shader = "defaultLit"
         self.scene.scene.add_geometry("map", self.map_mesh, mat)
-        self.mapTriangles = o3d.t.geometry.TriangleMesh.from_legacy(self.map_mesh)
-        self.raycastingScene.add_triangles(self.mapTriangles )
-    
+        self.mapTriangles = o3d.t.geometry.TriangleMesh.from_legacy(
+            self.map_mesh)
+        self.raycastingScene.add_triangles(self.mapTriangles)
+
     def raycast(self, origin, direction, max_distance):
         result = self.raycastingScene.raycast(origin, direction, max_distance)
         return result
