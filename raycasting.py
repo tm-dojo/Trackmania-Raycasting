@@ -16,7 +16,9 @@ class Raycasting:
         """Path to the map file."""
         self.map_mesh = o3d.io.read_triangle_mesh(path)
         self.map_path = path
-        self.scene.scene.remove_geometry("map")
+
+        if self.scene is not None:
+            self.scene.scene.remove_geometry("map")
 
         mat = rendering.MaterialRecord()
         mat.base_color = [
@@ -25,7 +27,9 @@ class Raycasting:
             random.random(), 1.0
         ]
         mat.shader = "defaultLit"
-        self.scene.scene.add_geometry("map", self.map_mesh, mat)
+
+        if self.scene is not None:
+            self.scene.scene.add_geometry("map", self.map_mesh, mat)
         self.mapTriangles = o3d.t.geometry.TriangleMesh.from_legacy(
             self.map_mesh)
         self.raycastingScene.add_triangles(self.mapTriangles)
